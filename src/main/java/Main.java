@@ -11,5 +11,13 @@ public class Main {
         Student savedStudent = studentService.addNewStudent(newStudent);
 
         System.out.println("Student saved: " + savedStudent);
+
+        try {
+            System.out.println(studentService.findStudentById(savedStudent.id()));
+            System.out.println(studentService.findStudentById("abc"));
+        } catch (StudentNotFoundException e) {
+            System.out.println("konnte Student nicht finden");
+        }
+
     }
 }
