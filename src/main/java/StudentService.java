@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class StudentService {
@@ -16,11 +15,9 @@ public class StudentService {
     }
 
     public Student findStudentById(String id) throws StudentNotFoundException {
-        Optional<Student> optionalStudent = repo.findStudentById(id);
-        if (optionalStudent.isEmpty()) {
-            throw new StudentNotFoundException("Student with id " + id + " does not exist in Repo");
-        }
-        return optionalStudent.get();
+        return repo
+                .findStudentById(id)
+                .orElseThrow(() -> new StudentNotFoundException("Student with id " + id + " does not exist in Repo"));
     }
 
 }

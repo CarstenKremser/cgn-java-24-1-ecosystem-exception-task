@@ -12,6 +12,7 @@ class StudentServiceTest {
         Student bruno = studentService.addNewStudent(Student.builder().name("Bruno").subject("french").build());
         Student carla = studentService.addNewStudent(Student.builder().name("Carla").subject("physics").build());
 
+
         try {
             Student actual = studentService.findStudentById(bruno.id());
             Assertions.assertEquals(bruno, actual);
@@ -23,17 +24,8 @@ class StudentServiceTest {
     @Test
     void findStudentById_shouldThrowException_whenCalledWithUnknownId() {
         StudentService studentService = new StudentService();
-        Student anna = studentService.addNewStudent(Student.builder().name("Anna").subject("english").build());
-        Student bruno = studentService.addNewStudent(Student.builder().name("Bruno").subject("french").build());
-        Student carla = studentService.addNewStudent(Student.builder().name("Carla").subject("physics").build());
 
-
-        try {
-            Student actual = studentService.findStudentById("abc");
-            fail();
-        } catch (StudentNotFoundException e) {
-            Assertions.assertTrue(true);
-        }
+        Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.findStudentById("abc"));
     }
 
 }
